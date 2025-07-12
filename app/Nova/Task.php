@@ -24,7 +24,7 @@ class Task extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -32,7 +32,7 @@ class Task extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'id', 'name', 'description',
     ];
 
     /**
@@ -45,7 +45,7 @@ class Task extends Resource
         return [
             ID::make()->sortable(),
             Text::make('name')->sortable()->rules('required', 'max:255'),
-            Textarea::make('description')->sortable()->rules('required'),
+            Textarea::make('description')->rules('required')->hideFromIndex(),
             Select::make('status')->options([
                 'todo' => 'Todo',
                 'doing' => 'Doing',

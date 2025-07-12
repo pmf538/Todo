@@ -1,61 +1,218 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Système de Gestion de Magasin (Back-Office)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Un système de gestion de magasin complet développé avec Laravel et Laravel Nova pour la gestion interne d'une entreprise commerciale.
 
-## About Laravel
+## Fonctionnalités
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 🔐 Gestion des administrateurs
+- Authentification sécurisée pour le personnel interne
+- Dashboard avec statistiques en temps réel
+- Interface d'administration intuitive avec Laravel Nova
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 📊 Dashboard et Statistiques
+- Nombre total de commandes
+- Chiffre d'affaires
+- Produits en stock faible
+- Répartition des commandes par statut
+- Alertes automatiques sur les stocks
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🛍️ Gestion des produits
+- CRUD complet des produits (nom, description, prix, stock, image)
+- Organisation par catégories
+- Suivi des stocks avec alertes automatiques
+- Seuil d'alerte personnalisable par produit
 
-## Learning Laravel
+### 📂 Gestion des catégories
+- Création, modification et suppression de catégories
+- Organisation hiérarchique des produits
+- Interface intuitive pour la gestion
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 👥 Gestion des clients
+- Enregistrement des informations clients (nom, adresse, téléphone, email)
+- Modification et suppression des fiches clients
+- Historique des commandes par client
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 📦 Gestion des commandes
+- Saisie de nouvelles commandes pour un client
+- Association des produits commandés avec leurs quantités
+- Statuts de commande : En attente, Validée, Livrée, Annulée
+- Décrément automatique du stock lors de la validation
+- Calcul automatique du montant total
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Technologies utilisées
 
-## Laravel Sponsors
+- **Backend** : Laravel 12.x
+- **Interface d'administration** : Laravel Nova 5.x
+- **Base de données** : MySQL
+- **Déploiement** : Laravel Envoy
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Installation
 
-### Premium Partners
+### Prérequis
+- PHP 8.2+
+- Composer
+- MySQL
+- Node.js et NPM
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Étapes d'installation
 
-## Contributing
+1. **Cloner le projet**
+```bash
+git clone <repository-url>
+cd todo
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Installer les dépendances**
+```bash
+composer install
+npm install
+```
 
-## Code of Conduct
+3. **Configuration de l'environnement**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. **Configuration de la base de données**
+Modifiez le fichier `.env` avec vos informations de base de données :
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=todo
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Security Vulnerabilities
+5. **Exécuter les migrations**
+```bash
+php artisan migrate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. **Peupler la base de données**
+```bash
+php artisan db:seed
+```
 
-## License
+7. **Compiler les assets**
+```bash
+npm run build
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+8. **Démarrer le serveur**
+```bash
+php artisan serve
+```
+
+## Structure de la base de données
+
+### Tables principales
+- **users** : Administrateurs du système
+- **categories** : Catégories de produits
+- **products** : Produits avec stock
+- **customers** : Clients
+- **orders** : Commandes
+- **order_items** : Éléments de commande (relation many-to-many)
+
+### Relations
+- Un produit appartient à une catégorie
+- Un client peut avoir plusieurs commandes
+- Une commande peut contenir plusieurs produits
+- Les commandes ont différents statuts
+
+## Utilisation
+
+### Accès à l'interface d'administration
+1. Accédez à `http://localhost:8000/nova`
+2. Connectez-vous avec les identifiants d'administrateur
+
+### Gestion des commandes
+1. **Créer une commande** : Sélectionnez un client et ajoutez des produits
+2. **Valider une commande** : Utilisez l'action "Valider la commande" (décrémente automatiquement les stocks)
+3. **Marquer comme livrée** : Utilisez l'action "Marquer comme livrée"
+
+### Gestion des stocks
+- Les alertes de stock faible apparaissent automatiquement sur le dashboard
+- Le stock est décrémenté automatiquement lors de la validation des commandes
+- Chaque produit a un seuil d'alerte personnalisable
+
+## Déploiement
+
+### Avec Laravel Envoy
+
+1. **Configurer le serveur**
+Modifiez le fichier `Envoy.blade.php` avec vos informations de serveur.
+
+2. **Déployer**
+```bash
+envoy run deploy
+```
+
+3. **Sauvegarder**
+```bash
+envoy run backup
+```
+
+4. **Rollback en cas de problème**
+```bash
+envoy run rollback
+```
+
+### Déploiement manuel
+
+1. **Préparer le serveur**
+```bash
+composer install --no-dev --optimize-autoloader
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+2. **Configurer les permissions**
+```bash
+chown -R www-data:www-data /path/to/project
+chmod -R 755 /path/to/project
+chmod -R 775 /path/to/project/storage
+chmod -R 775 /path/to/project/bootstrap/cache
+```
+
+## Sécurité
+
+- Authentification sécurisée pour les administrateurs
+- Validation des données côté serveur
+- Protection CSRF
+- Gestion sécurisée des sessions
+
+## Maintenance
+
+### Tâches de maintenance recommandées
+- Sauvegardes régulières de la base de données
+- Surveillance des logs d'erreur
+- Mise à jour régulière des dépendances
+- Nettoyage des caches
+
+### Commandes utiles
+```bash
+# Vider les caches
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+
+# Optimiser pour la production
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Vérifier les stocks faibles
+php artisan tinker
+>>> App\Models\Product::whereRaw('stock <= stock_alert_threshold')->get();
+```
+
+## Support
+
+Pour toute question ou problème, consultez la documentation Laravel et Laravel Nova, ou contactez l'équipe de développement.
+
+## Licence
+
+Ce projet est sous licence MIT.
